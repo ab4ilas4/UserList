@@ -1,0 +1,11 @@
+<div class="container">
+    <h5>Please select user to find the Post:</h5>
+</div>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <div *ngFor="let user of userList">
+            <button type="button" class="btn btn-primary mr-1" (click)="onSelectingUser(user)">{{user.name.split(' ')[0]}}</button>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>

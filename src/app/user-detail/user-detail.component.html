@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            Posts form {{user.name}}
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-md-7">
+            <ng-container *ngFor="let post of postList; let i=index">
+                <div *ngIf="i<3">
+                    <a class="btn btn-info mb-2" data-toggle="collapse"  role="button"
+                        aria-expanded="false" aria-controls="collapsePost"(click)="onClickingPost(post.id,i)">
+                        <b>{{post?.title}}</b>
+                        <br>
+                        <span class="float-left">{{post?.body}}</span>
+                    </a>
+                    <div class="collapse mb-2" id="collapsePost{{i}}">
+                        <div class="card card-body">
+                            {{post?.body}}
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="i>3 && load ==true">
+
+                    <a class="btn btn-info mb-2" data-toggle="collapse"  role="button"
+                        aria-expanded="false" aria-controls="collapsePost" (click)="onClickingPost(i)">
+                        <b>{{post?.title}}</b>
+                        <br>
+                        <span class="float-left">{{post?.body}}</span>
+                    </a>
+                    <div class="collapse mb-2" id="collapsePost{{i}}">
+                        <div class="card card-body">
+                            {{post?.body}}
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 ">
+            <div class="float-right">
+                    <button class=" btn btn-primary" (click)="onLoadAll()">...Load all</button>
+            </div>
+        </div>
+    </div>
+</div>
