@@ -1,43 +1,52 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { Post } from '../model/post.model';
+
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../model/user.model';
+import { Post } from 'src/app/model/post.model';
+import { User } from 'src/app/model/user.model';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit, AfterViewInit {
+export class UserDetailComponent implements OnInit {
   postList: Post[];
-  commentList: Comment[];
+  commentList: any[];
   userId: number;
   user: User;
   load: boolean = false;
+  showloader: boolean;
   showdetail: boolean;
-  constructor(private activatedRoute: ActivatedRoute, private userSvc: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute, private userSvc: UserService, public cdref: ChangeDetectorRef) {
 
+  }
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
+      this.activatedRoute.params.subscribe((params: Params) => {
       this.userId = params['id'];
-      this.user = this.userSvc.getUserById(this.userId)
-      this.userSvc.getPostofUser().subscribe(
-        (resp: Post[]) => {
-          this.load = false;
-          this.postList = resp;
-          this.postList = this.postList.filter(post => (post.userId == this.userId));
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err.message);
-        }
-      )
+      this.showloader = true;
+      this.getPostofUser();
     });
   }
-  ngAfterViewInit(): void {
 
+
+  getPostofUser() {
+    this.user = this.userSvc.getUserById(this.userId)
+    this.userSvc.getPostofUser().subscribe(
+      (resp: Post[]) => {
+        this.load = false;
+        this.postList = resp;
+        this.showloader = false;
+        this.postList = this.postList.filter(post => (post.userId == this.userId));
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    )
   }
+
   onLoadAll() {
     this.load = true;
   }

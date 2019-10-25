@@ -9,7 +9,7 @@ const routes: Routes = [{
 },
 {
   path: 'user-list',
-  loadChildren:'./user-list/user-list.module#UserListModule'},];
+  loadChildren:'./components/user-list/user-list.module#UserListModule'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
