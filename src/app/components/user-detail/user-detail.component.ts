@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from 'src/app/model/post.model';
 import { User } from 'src/app/model/user.model';
@@ -20,6 +20,7 @@ export class UserDetailComponent implements OnInit {
   load: boolean = false;
   showloader: boolean;
   showdetail: boolean;
+  faPlus = faPlus;
   constructor(private activatedRoute: ActivatedRoute, private userSvc: UserService, public cdref: ChangeDetectorRef) {
 
   }
@@ -56,7 +57,6 @@ export class UserDetailComponent implements OnInit {
     if (document.getElementById('collapsePost' + i).className === 'collapse mb-2') {
       this.userSvc.getComments().subscribe(
         (resp: Comment[]) => {
-          this.load = false;
           this.commentList = resp;
           this.commentList = this.commentList.filter(comment => (comment.postId == postId));
           console.log(this.commentList)

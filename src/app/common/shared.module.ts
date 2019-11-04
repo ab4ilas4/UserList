@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderModule } from './loader/loader.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
- declarations:[  ],
+  declarations: [],
   imports: [
     CommonModule,
- LoaderModule
+    LoaderModule,
+    FontAwesomeModule
   ],
-  exports:[LoaderModule]
+  exports: [LoaderModule, FontAwesomeModule]
 })
 export class SharedModule { }
