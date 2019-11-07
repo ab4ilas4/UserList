@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from 'src/app/model/post.model';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { Comment } from 'src/app/model/comment.model';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserDetailComponent implements OnInit {
   postList: Post[];
-  commentList: any[];
+  commentList: Comment[];
   userId: number;
   user: User;
   load: boolean = false;
